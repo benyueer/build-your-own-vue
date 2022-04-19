@@ -1,6 +1,7 @@
 import { computed } from "../computed";
 import { effect } from "../effect";
 import { reactive } from "../reactive";
+import { watch } from "../watchApi";
 
 describe('observer', () => {
   it('reactive', () => {
@@ -39,5 +40,24 @@ describe('observer', () => {
     state.msg = 'hello world'
 
     expect(render).toBe('hello world world')
+  })
+
+  it('watch', () => {
+    const state: any = reactive({
+      msg: 'data1'
+    })
+
+    let changeData = ''
+
+    watch(
+      () => state.msg,
+      (val, old) => {
+        changeData = val
+      }
+    )
+
+    state.msg = 'data2'
+
+    expect(changeData).toBe('data2')
   })
 })

@@ -1,6 +1,7 @@
 import { computed } from "./computed"
 import { effect } from "./effect"
 import { reactive } from "./reactive"
+import { watch } from "./watchApi"
 
 function computedTest() {
   const state: any = reactive({ msg: 'hello' })
@@ -22,4 +23,24 @@ function computedTest() {
   console.log(render)
 }
 
-computedTest()
+// computedTest()
+
+function watchTest() {
+  const state: any = reactive({
+    msg: 'data1'
+  })
+
+  let changeData = ''
+
+  watch(
+    () => state.msg,
+    (val, old) => {
+      changeData = val
+    }
+  )
+
+  state.msg = 'data2'
+  console.log(changeData)
+}
+
+watchTest()

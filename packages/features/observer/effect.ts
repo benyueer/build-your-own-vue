@@ -49,6 +49,10 @@ export class ReactiveEffect<T = any> {
       }
     }
   }
+
+  stop() {
+    this.active = false
+  }
 }
 
 
